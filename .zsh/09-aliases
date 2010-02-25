@@ -1,0 +1,72 @@
+#aliases
+
+# ls aliases
+alias ls='ls --color=auto'
+alias l='ls'
+alias ll='ls -lh'
+alias la='ls -lha'
+
+# grep stuff
+alias grep='grep -Hni --color=auto '
+alias psg='ps ax | grep -v grep | grep '
+alias eg='egrep -i'
+alias lg='ls --color=always | grep --color=always -i'
+
+# less aliases
+alias less='less -W'
+alias lf='less -i +F'
+
+# shortcuts
+alias s='screen -X screen'
+alias lvim="vim -c \"normal '0\"" # open last edited file
+alias update='sudo apt-get update && sudo apt-get upgrade'
+alias timestamp='date "+%Y%m%d%H%M%S"' # generate timestamp
+alias tsdir='timestamp | xargs mkdir' # generate dir with actual timestamp
+alias agi='sudo apt-get install'
+alias acs='apt-cache search'
+
+# commandlinefu
+alias psram='ps aux | sort -rnk 4 | head' # print top 10 ram killers
+
+# autocorrections
+alias cd..='cd ..'
+alias ..='cd ..'
+alias 'cd-'='cd -'
+alias apt-get='sudo apt-get'
+alias df='df -h'
+
+# usefull progs
+alias q='qalc'
+alias m='mutt -y'
+alias n='newsbeuter'
+alias ev='evince'
+alias e='evince'
+
+# global aliases
+alias -g L='| less'
+alias -g G='| grep'
+alias -g EG='| egrep'
+alias -g H='| head'
+alias -g X='| xargs'
+
+# suffix aliases
+alias -s pdf='evince'
+alias -s mp3='yauap'
+alias -s tex='vi'
+alias -s txt='vi'
+alias -s png='eog'
+alias -s jpg='eog'
+alias -s mpg='vlc'
+alias -s avi='vlc'
+
+# open webbrowser
+alias -s de=$BROWSER
+alias -s org=$BROWSER
+alias -s net=$BROWSER
+alias -s com=$BROWSER
+alias -s info=$BROWSER
+
+
+
+# for a better use with vim. All the markings: #{{{ and #}}} belong to it
+# vim: foldmethod=marker commentstring=#%s

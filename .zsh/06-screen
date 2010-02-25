@@ -1,0 +1,54 @@
+
+function precmd {#{{{
+
+    local TERMWIDTH
+    (( TERMWIDTH = ${COLUMNS} - 1 ))
+
+    # update VCS information
+    vcs_info
+
+
+
+    ###
+    # Truncate the path if it's too long.
+    
+    PR_FILLBAR=""
+    PR_PWDLEN=""
+    
+    local promptsize=${#${(%):---(%n@%m:%l)---()--}}
+    local pwdsize=${#${(%):-%~}}
+    
+    if [[ "$promptsize + $pwdsize" -gt $TERMWIDTH ]]; then
+	    ((PR_PWDLEN=$TERMWIDTH - $promptsize))
+    else
+	PR_FILLBAR="\${(l.(($TERMWIDTH - ($promptsize + $pwdsize)))..${PR_HBAR}.)}"
+    fi
+
+
+    if [[ "$TERM" == "screen" ]]; then
+        # change (zimon|z) to username
+        local wd=`perl -e '$x=shift; $ x=~ s/(\w).*?\//$1\//g; $x=~s/\/h\/(zimon|z)/~/; print $x;' "$PWD"`
+        if [[ -n ${VCS_INFO_message_0_} ]] ; then
+            PR_STITLE=$'\ek'$wd\ ${VCS_INFO_message_0_}$'\e\\'
+        else 
+            PR_STITLE=$'%{\ek'$wd$'\e\\%}'
+        fi
+        #echo -ne = $'\ek'$wd$'\e\\'
+    fi
+
+}
+#}}}
+
+
+preexec () {#{{{
+    if [[ "$TERM" == "screen" ]]; then
+
+	local CMD=${1[(wr)^(*=*|sudo|-*)]}
+	echo -n "\ek$CMD\e\\"
+    fi
+}
+#}}}
+
+
+# for a better use with vim. All the markings: #{{{ and #}}} belong to it
+# vim: foldmethod=marker commentstring=#%s

@@ -1,0 +1,26 @@
+#aliases
+alias s='screen -X screen' # open new screen window. Add command to be executed as argument
+alias ll='ls -lh'
+alias la='ls -lha'
+alias cd..='cd ..'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias lg='ls --color=always | grep --color=always -i'
+alias lvim="vim -c \"normal '0\"" # open last edited file
+alias timestamp='date "+%Y%m%d%H%M%S"' # generate timestamp
+alias psg='ps ax | grep -v grep | grep ' # grep for running process
+alias df='df -h'
+alias less='less -W'
+alias lf='less -i +F'
+alias tsdir='timestamp | xargs mkdir' # generate dir with actual timestamp
+alias psram='ps aux | sort -rnk 4 | head' # print top 10 ramkillers
+
+# shortcuts
+alias update='sudo apt-get update && sudo apt-get upgrade'
+alias apt-get='sudo apt-get'
+alias agi='sudo apt-get install'
+alias acs='apt-cache search'
+alias ev='evince'
+alias q='qalc'
+alias m='mutt -y'
+alias n='newsbeuter'

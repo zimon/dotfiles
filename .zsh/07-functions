@@ -1,0 +1,39 @@
+# use dots for dirs
+rationalise-dot() {# {{{
+    if [[ $LBUFFER = *.. ]]; then
+        LBUFFER+=/..
+    else
+        LBUFFER+=.
+    fi
+}
+zle -N rationalise-dot
+bindkey . rationalise-dot
+# }}}
+
+# expand global aliases with space
+global-alias-space () {#{{{
+           local ga="$LBUFFER[(w)-1]"
+               [[ -n $ga ]] && LBUFFER[(w)-1]="${${galiases[$ga]}:-$ga}"
+                   zle self-insert
+}
+zle -N global-alias-space
+bindkey ' ' global-alias-space
+#}}}
+#
+# searches
+w() {# {{{
+    $BROWSER "http://de.wikipedia.org/w/index.php?title=Spezial:Suche&search=$*"
+}# }}}
+
+we() {# {{{
+    $BROWSER "http://en.wikipedia.org/wiki/Special:Search?search=$*"
+}# }}}
+
+g() {# {{{
+    $BROWSER "http://www.google.de/search?source=ig&hl=de&rlz=&q=$*"
+}# }}}
+
+
+
+# for a better use with vim. All the markings: #{{{ and #}}} belong to it
+# vim: foldmethod=marker commentstring=#%s

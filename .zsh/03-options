@@ -1,0 +1,20 @@
+setopt extendedglob 
+
+# Append new cmmands to history, with timestamps, share history with other 
+# zsh sessions, save no duplicates, ignore commands that begin with spave
+setopt appendhistory extended_history SHARE_HISTORY histignorealldups histignorespace
+
+setopt auto_pushd # Automaticaly pushd on cd
+setopt pushd_ignore_dups # Pushd no duplicates
+
+setopt notify # Directly notify on finished background jobs 
+setopt longlistjobs 
+setopt completeinword # Tabcompletion in a word
+setopt correct # Correct typos in commands and arguments
+setopt auto_resume # Resume stopped jobs if they are called again
+setopt list_ambiguous # list alternatives if there are some
+setopt rec_exact
+setopt glob_dots # bash compatibility (Do not require a leading `.' in a filename to be matched explicitly.)
+
+# for a better use with vim. All the markings: #{{{ and #}}} belong to it
+# vim: foldmethod=marker commentstring=#%s

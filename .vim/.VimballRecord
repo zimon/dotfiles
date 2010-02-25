@@ -1,0 +1,4 @@
+snippy_plugin.vba: call delete('/home/zimon/.vim/plugin/snippetsEmu.vim')|call delete('/home/zimon/.vim/doc/snippets_emu.txt')
+omniperl.vba: call delete('/home/zimon/.vim/ftplugin/perl/omniperl.pl')|call delete('/home/zimon/.vim/ftplugin/perl/omniperl.vim')|call delete('/home/zimon/.vim/doc/omniperl.txt')
+twitvim-0.4.1.vba: call delete('/home/zimon/.vim/plugin/twitvim.vim')|call delete('/home/zimon/.vim/doc/twitvim.txt')
+winmanager.vba: call delete('/home/zimon/.vim/doc/winmanager.txt')|call delete('/home/zimon/.vim/plugin/start.gnome')|call delete('/home/zimon/.vim/plugin/start.kde')|call delete('/home/zimon/.vim/plugin/winfileexplorer.vim')|call delete('/home/zimon/.vim/plugin/winmanager.vim')|call delete('/home/zimon/.vim/plugin/wintagexplorer.vim')

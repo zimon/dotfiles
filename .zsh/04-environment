@@ -1,0 +1,26 @@
+bindkey -e
+
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+
+export PATH=$PATH:/home/zimon/bin
+export BROWSER="/usr/bin/chromium-browser"
+
+export EDITOR=/usr/bin/vi
+export NATURALDOCS_PATH=/home/zimon/uni/forum2rss/naturaldocs
+export GPG_TTY=‘tty‘
+
+typeset -gx EDITOR=vi
+export LSCOLORS="HxFxCxDxBxHGHDaBaGaCaD"
+export TEXINPUTS=.:$HOME/styles//:
+
+export SHELL='/usr/bin/zsh'
+export PAGER=${PAGER:-less}
+
+REPORTTIME=5       # report about cpu-/system-/user-time of command if running longer than 5 seconds
+watch=(notme root) # watch for everyone but me and root
+
+
+# for a better use with vim. All the markings: #{{{ and #}}} belong to it
+# vim: foldmethod=marker commentstring=#%s
