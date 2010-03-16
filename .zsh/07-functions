@@ -33,6 +33,11 @@ g() {# {{{
     $BROWSER "http://www.google.de/search?source=ig&hl=de&rlz=&q=$*"
 }# }}}
 
+# search in all pdf-files in current dir
+pdfgrep() { # {{{
+    for i in *.pdf; do pdftotext $i; grep "$*" $i:s/pdf/txt; rm $i:s/pdf/txt; done
+} # }}}
+
 
 
 # for a better use with vim. All the markings: #{{{ and #}}} belong to it
