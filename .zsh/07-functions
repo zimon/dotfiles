@@ -35,7 +35,7 @@ g() {# {{{
 
 # search in all pdf-files in current dir
 pdfgrep() { # {{{
-    for i in *.pdf; do pdftotext $i; grep "$*" $i:s/pdf/txt; rm $i:s/pdf/txt; done
+    for i in *.pdf; do pdftotext $i; grep -i "$*" $i:s/.pdf/.txt; rm $i:s/.pdf/.txt; done
 } # }}}
 
 
