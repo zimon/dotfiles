@@ -15,6 +15,9 @@ set wildmenu
 set lazyredraw      "Do not redraw while running macros
 
 set cursorline      "highlight actual line
+
+set foldmethod=marker "Automatic folding with markers
+
 "}}}
 
 "Searching"{{{
@@ -82,10 +85,7 @@ noremap <C-y> :buffers<CR>
 noremap , ;
 
 "Rechtschreibung
-map <F9> :w!<CR>:!aspell -c %<CR>:e! %<CR>
-
-"Automatic folding with markers
-set foldmethod=marker
+"map <F9> :w!<CR>:!aspell -c %<CR>:e! %<CR>
 
 "Map next tab/buffer
 map <C-n> :bn!<CR>
@@ -123,12 +123,29 @@ map <C-m> ]c
 " Open Help-Link in new vertical splitscreen
 map <leader>ts :vsp<CR>:exec("tag ".expand("<cword>"))<CR><C-w>x
 
+
+" Function calls"{{{
+
+map <leader>ll :call RunLaTeX()<CR>
+
+map <leader>lv :call ViewLaTeX()<CR>
+
+map <silent> <c-h> :call HtmlEscape()<CR>"}}}
+
 "}}}
 
 "Autocommands "{{{
 
 " automatically give executable permissions if file begins with #! and contains  '/bin/' in the path 
-au BufWritePost * if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent !chmod a+x <afile> 
+au BufWritePost * if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent !chmod a+x <afile>
+
+
+" automatically insert shebang line for script files
+au BufEnter * call CreateShebang()
+
+"}}}
+
+"Functions"{{{
 
 " automatically insert shebang line for script files
 function CreateShebang()"{{{
@@ -142,26 +159,7 @@ function CreateShebang()"{{{
         end
     end
 endfunction
-
-au BufEnter * call CreateShebang()
 "}}}
-
-"}}}
-
-"Sessions"{{{
- autocmd VimEnter * call LoadSession()
- autocmd VimLeave * call SaveSession() 
- function! SaveSession() 
-    execute 'mksession! $HOME/.vim/sessions/session.vim' 
- endfunction 
- function! LoadSession() 
-    if argc() == 0 
-       execute 'source $HOME/.vim/sessions/session.vim' 
-    endif 
- endfunction 
-"}}}
-
-"Functions"{{{
 
 " Call pdflatex with \ll
 function RunLaTeX()"{{{
@@ -169,17 +167,16 @@ function RunLaTeX()"{{{
         !pdflatex "%"
     end
 endfunction
-map <leader>ll :call RunLaTeX()<CR>"}}}
-
+"}}}
 
 " Call pdf of actual LaTeX document with \lc
 function ViewLaTeX()"{{{
     if &ft == 'tex'
-        let filename = expand("%:p:h")."/".expand("%:r").".pdf"
+        let filename = expand("%:r").".pdf"
         exec "!evince " . filename . "&"
     end
 endfunction
-map <leader>lv :call ViewLaTeX()<CR>"}}}
+"}}}
 
 " Encode all special characters with html-escape sequences
 function HtmlEscape()"{{{
@@ -191,14 +188,27 @@ function HtmlEscape()"{{{
     silent s/Ü/\&Uuml;/eg
     silent s/ß/\&szlig;/eg
 endfunction
-map <silent> <c-h> :call HtmlEscape()<CR>"}}}
-
 "}}}
 
 
 "Automatically update helptags (See VimTip 823)
-"au BufWritePost ~/.vim/doc/* helptags ~/.vim/doc
+au BufWritePost ~/.vim/doc/* helptags ~/.vim/doc
 map <leader>ut :helptags ~/.vim/doc<CR>
+
+"}}}
+
+"Sessions"{{{
+" autocmd VimEnter * call LoadSession()
+" autocmd VimLeave * call SaveSession() 
+" function! SaveSession() 
+"    execute 'mksession! $HOME/.vim/sessions/session.vim' 
+" endfunction 
+" function! LoadSession() 
+"    if argc() == 0 
+"       execute 'source $HOME/.vim/sessions/session.vim' 
+"    endif 
+" endfunction 
+"}}}
 
 
 " vim: foldmethod=marker foldmarker={{{,}}} foldlevel=0 
