@@ -78,6 +78,9 @@ command! Qa qa
 command! Q q
 "}}}
 
+" jump to mark with ä
+map ä `
+
 " show buffers C-y
 noremap <C-y> :buffers<CR>
 
@@ -120,8 +123,17 @@ noremap <Down> <C-w>-
 "Jump to next diff
 map <C-m> ]c
 
-" Open Help-Link in new vertical splitscreen
-map <leader>ts :vsp<CR>:exec("tag ".expand("<cword>"))<CR><C-w>x
+" Open help-link or function declaration/definition in new vertical splitscreen
+map ö :vsp<CR>:exec("tag ".expand("<cword>"))<CR><C-w>x
+
+" Toggle Taglist with F3
+map <F3> :TlistToggle<cr>
+
+" Generate ctags with F4
+map <F4> :!/usr/bin/ctags -R --c-kinds=+p --c++-kinds=+p --perl-kinds=+d --fields=+iaS --extra=+q .<CR>
+
+" Show notes with F5
+map <F5> :h znotizen<CR>zM
 
 
 " Function calls"{{{
@@ -173,7 +185,7 @@ endfunction
 function ViewLaTeX()"{{{
     if &ft == 'tex'
         let filename = expand("%:r").".pdf"
-        exec "!evince " . filename . "&"
+        exec "!evince " . filename . " > /dev/null 2>&1 &"
     end
 endfunction
 "}}}
